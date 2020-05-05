@@ -1,0 +1,23 @@
+{
+  "name": "funemployed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless": "^1.68.0",
+    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-offline": "^6.1.4",
+    "serverless-plugin-optimize": "^4.1.4-rc.1",
+    "serverless-s3-sync": "^1.12.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.667.0",
+    "pino": "^6.2.1"
+  }
+}
