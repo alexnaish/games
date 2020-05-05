@@ -14,7 +14,7 @@ StaticSiteS3BucketPolicy:
             Fn::Join: [
               "arn:aws:s3:::",
               {
-                "Ref": "StaticSite"
+                "Ref": "FrontEnd"
               },
               "/*"
             ]
