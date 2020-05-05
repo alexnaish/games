@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FunEmployed</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+  <div id="app">
+
+    <p>
+      <fieldset>
+        <button v-on:click="this.createRoom" :disabled="websocket">Create Room</button>
+        <button v-on:click="this.start" :disabled="!websocket">Start Game</button>
+
+        <pre>{{users}}</pre>
+      </fieldset>
+    </p>
+
+    <p>
+      <fieldset>
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" name="name" v-model.trim="name" :disabled="websocket" />
+        </div>
+        <div>
+          <label for="name">Room:</label>
+          <input type="text" name="room" v-model.trim="room" :disabled="websocket" />
+        </div>
+        <button v-on:click="this.connect" :disabled="websocket || !name || !room">Connect</button>
+        <button v-on:click="this.disconnect" :disabled="!websocket">Disconnect</button>
+      </fieldset>
+    </p>
+
+    <pre>{{ messages.join('\n') }}</pre>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        endpoint: 'ws://localhost:3001',
+        name: '',
+        room: '',
+        firstBoss: '',
+        job: '',
+        users: {},
+        messages: [],
+        websocket: undefined
+      },
+      methods: {
+        createRoom() {
+          this._createWebsocket({ operation: 'creation' });
+        },
+        connect() {
+          this._createWebsocket({ operation: 'connect', room: this.room, name: this.name });
+        },
+        _createWebsocket(params) {
+          const urlParams = new URLSearchParams(params);
+          const websocket = this.websocket = new WebSocket(`${this.endpoint}?${urlParams.toString()}`);
+
+          websocket.onclose = ({ wasClean, code, reason }) => {
+            this.messages.push(
+              `onclose:   ${JSON.stringify({ wasClean, code, reason })}`
+            );
+            this.websocket = null;
+          };
+
+          websocket.onerror = error => {
+            console.log(error);
+            this.messages.push(
+              'onerror:   An error has occurred. See console for details.'
+            );
+          };
+
+          websocket.onmessage = ({ data }) => {
+            const message = JSON.parse(data);
+            switch (message.event) {
+              case 'ROOM_CREATION':
+                this.room = message.payload;
+                break;
+              case 'ROOM_JOINED': {
+                const { user } = message.payload;
+                this.users[user.connectionId] = user.name;
+                break;
+              }
+              case 'ROOM_DISCONNECT': {
+                const { user } = message.payload;
+                delete this.users[user.connectionId];
+                break;
+              }
+              case 'GAME_STARTING':
+                this.firstBoss = message.payload.firstBoss;
+                this.job = message.payload.job;
+                break;
+            }
+            this.messages.push(`onmessage: ${data}`);
+          };
+
+          websocket.onopen = () => {
+            this.messages.push('onopen:    Connected successfully.');
+          };
+        },
+        start() {
+          this.messages.push('client:    Game starting.');
+          this.websocket.send(
+            JSON.stringify({ action: 'start', data: { room: this.room } })
+          );
+        },
+        users() {
+          this.messages.push('client:    Getting users.');
+          this.websocket.send(
+            JSON.stringify({ action: 'users', data: 'ABCD' })
+          );
+        },
+        disconnect() {
+          // WebSocket sends a message to API Gateway that gets routed to the
+          // '$disconnect' route.
+          this.messages.push('client:    Closing the connection.');
+          this.websocket.close();
+          this.websocket = null;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
