@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start-fe": "parcel app/index.html",
+    "start-be": "serverless offline start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "parcel": "^1.12.4",
+    "sass": "^1.26.5",
     "serverless": "^1.68.0",
     "serverless-dynamodb-local": "^0.2.39",
     "serverless-offline": "^6.1.4",
@@ -18,6 +22,10 @@
   },
   "dependencies": {
     "aws-sdk": "^2.667.0",
-    "pino": "^6.2.1"
+    "framer-motion": "^1.10.3",
+    "pino": "^6.2.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "wouter": "^2.4.0"
   }
 }
