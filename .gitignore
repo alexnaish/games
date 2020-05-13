@@ -2,4 +2,4 @@
 **/.dynamodb/**
 .vscode
 .cache
-dist
+**/dist/**

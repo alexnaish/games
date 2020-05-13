@@ -38,9 +38,6 @@ functions:
 
 custom:
   siteName: game-funemployed
-  s3Sync:
-    - bucketName: ${self:custom.siteName}
-      localDir: dist
   dynamodb:
     stages:
       - ${self:provider.stage}
@@ -54,7 +51,6 @@ custom:
 plugins:
   - serverless-dynamodb-local
   - serverless-plugin-optimize
-  - serverless-s3-sync
   - serverless-offline
 
 resources:

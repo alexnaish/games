@@ -5,8 +5,29 @@
 html, body {
   margin: 0;
   padding: 0;
+  font-family: 'Raleway', sans-serif;
 }
 
 body {
   min-height: 100vh;
+  color: #EEE;
 }
+
+a {
+  color: #EEE;
+}
+
+
+@keyframes rotateBackground {
+  0% {
+    background-position-x: 0%;
+  }
+
+  50% {
+    background-position-x: 50%;
+  }
+
+  100% {
+    background-position-x: 100%;
+  }
+};

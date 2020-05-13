@@ -5,12 +5,11 @@ const initialState = {};
 function reducer(state, action) {
   switch (action.type) {
     case TYPES.OPEN:
+    case TYPES.CLOSE:
       return {
         ...state,
-        socket: action.payload
+        connected: action.type === TYPES.OPEN
       };
-    case TYPES.CLOSE:
-      return null;
     default:
       throw new Error(`Unknown action.type: ${action.type}`);
   }

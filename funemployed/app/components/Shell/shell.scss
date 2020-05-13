@@ -1,0 +1,165 @@
+$nav-height: 60px;
+$logo-height: 40px;
+$padding: 20px;
+$side-link-size: 44px;
+$side-link-colour: #25313D;
+$icon-size: 20px;
+$main-colour: rgb(66, 146, 231);
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    height: $nav-height;
+    background-color: rgb(18, 23, 29);
+  }
+
+  &__toggle-button {
+    flex-shrink: 0;
+    height: $nav-height;
+    width: $nav-height;
+    background-color: $main-colour;
+    border: none;
+    outline: none;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    background-image: url('https://img.icons8.com/ios/50/FFFFFF/menu.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25px;
+
+    &:hover {
+      background-color: darken($main-colour, 10);
+    }
+  }
+
+  &__content {
+    flex-grow: 1;
+    margin-left: $nav-height;
+    padding: $padding;
+    background: linear-gradient(65deg, #FF7F00, #009FFF);
+    background-size: 1200% 1200%;
+    animation: rotateBackground 15s ease alternate infinite;
+  }
+
+  &__sidebar {
+    position: fixed;
+    top: $nav-height;
+    left: 0;
+    height: calc(100vh - #{$nav-height});
+    width: $nav-height;
+    background-color: rgb(31, 39, 46);
+    overflow: hidden;
+    transition: width 0.2s ease, background-color 0.2s ease;
+  }
+
+  &__sidebar--expanded {
+    width: 300px;
+    max-width: 90%;
+  }
+
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 40px;
+
+  &__logo {
+    position: relative;
+    text-decoration: none;
+    padding: 10px 40px;
+    border: 1px solid $main-colour;
+    border-radius: 5px;
+    height: $logo-height;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $main-colour;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: -20px;
+      top: -5px;
+      height: 30px;
+      width: 30px;
+      background: #4292e7;
+      border: 5px solid #12171d;
+      border-radius: 50%;
+      background-image: url(https://img.icons8.com/cotton/64/000000/billing.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 20px;
+    }
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: $side-link-size;
+    height: $side-link-size;
+    margin: 20px ($nav-height - $side-link-size) / 2;
+    background-color: $side-link-colour;
+    border: 1px solid $side-link-colour;
+    border-radius: 50%;
+    transition: border-radius 0.2s ease;
+
+    &:hover {
+      background-color: lighten($color: $side-link-colour, $amount: 10);
+    }
+  }
+
+  &__text {
+    display: none;
+  }
+
+  &__icon {
+    width: $icon-size;
+    height: $icon-size;
+  }
+
+}
+
+.shell__sidebar--expanded {
+
+  .sidebar__link {
+    width: auto;
+    background-color: none;
+    border-radius: 5px;
+  }
+
+  .sidebar__text {
+    display: block;
+    margin-left: 10px;
+  }
+
+}
+
+.connection-status {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red;
+  transition: background-color 0.3s ease;
+
+  &--connected {
+    background-color: green;
+  }
+}

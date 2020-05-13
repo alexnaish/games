@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from "wouter";
 import { render } from "react-dom";
 
-import { SocketProvider } from './modules/socketmanager/';
+import { SocketProvider } from './components/socketmanager';
 import { Homepage } from './pages/home/';
 import { Gamepage } from './pages/game/';
 import { Userpage } from './pages/user/';

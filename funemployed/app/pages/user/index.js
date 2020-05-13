@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import { useWebhook } from '../../modules/socketmanager/hook';
+import { useWebhook } from '../../components/socketmanager/hook';
+import { Shell } from '../../components/Shell';
 
 export const Userpage = ({ }) => {
 
@@ -28,7 +29,7 @@ export const Userpage = ({ }) => {
   }, [state])
 
   return (
-    <div>
+    <Shell>
       Status: {connected ? 'Connected' : 'Not Connected'}
       Role: {state.role}
       State: {JSON.stringify(state)}
@@ -45,6 +46,6 @@ export const Userpage = ({ }) => {
           <button onClick={connectToGame} disabled={connected}>Connect</button>
         </fieldset>
       </div>
-    </div >
+    </Shell>
   )
 }

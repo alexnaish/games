@@ -17,11 +17,11 @@
     "serverless": "^1.68.0",
     "serverless-dynamodb-local": "^0.2.39",
     "serverless-offline": "^6.1.4",
-    "serverless-plugin-optimize": "^4.1.4-rc.1",
-    "serverless-s3-sync": "^1.12.0"
+    "serverless-plugin-optimize": "^4.1.4-rc.1"
   },
   "dependencies": {
     "aws-sdk": "^2.667.0",
+    "classnames": "^2.2.6",
     "framer-motion": "^1.10.3",
     "pino": "^6.2.1",
     "react": "^16.13.1",

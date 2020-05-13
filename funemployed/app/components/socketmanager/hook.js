@@ -1,4 +1,7 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useContext, useEffect, useRef } from 'react';
+
+import { SocketContext } from './';
+import { TYPES } from './actions';
 
 const NOOP = () => { };
 
@@ -6,6 +9,7 @@ export const useWebhook = ({ onOpen = NOOP, onClose = NOOP, onMessage = NOOP, on
   const [connectionUri, setConnectionUri] = useState('');
   const [connected, setConnected] = useState(false);
   const webSocket = useRef(null);
+  const [_, dispatch] = useContext(SocketContext);
 
   const connect = useCallback((connectionString, params = {}) => {
     const queryParams = Object.keys(params) ? `?${new URLSearchParams(params).toString()}` : ''
@@ -19,6 +23,7 @@ export const useWebhook = ({ onOpen = NOOP, onClose = NOOP, onMessage = NOOP, on
     webSocket.current.onopen = () => {
       console.log('socket opened');
       setConnected(true);
+      dispatch({ type: TYPES.OPEN });
       onOpen();
     }
 
@@ -35,6 +40,7 @@ export const useWebhook = ({ onOpen = NOOP, onClose = NOOP, onMessage = NOOP, on
     webSocket.current.onclose = () => {
       console.log('socket closing');
       onClose();
+      dispatch({ type: TYPES.CLOSE });
       setConnected(false);
     }
 
