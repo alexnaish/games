@@ -17,6 +17,7 @@ export const useWebhook = ({ onOpen = NOOP, onClose = NOOP, onMessage = NOOP, on
   }, [])
 
   useEffect(() => {
+		let mounted = true;
     if (!connectionUri) return;
     webSocket.current = new WebSocket(connectionUri);
 
@@ -39,16 +40,18 @@ export const useWebhook = ({ onOpen = NOOP, onClose = NOOP, onMessage = NOOP, on
 
     webSocket.current.onclose = () => {
       console.log('socket closing');
-      onClose();
-      dispatch({ type: TYPES.CLOSE });
-      setConnected(false);
+			onClose();
+			if (mounted) {
+				dispatch({ type: TYPES.CLOSE });
+				setConnected(false);
+			}
     }
 
     return () => {
-      setReadyState(STATE.CLOSING);
+			mounted = false;
+      setConnected(false);
       onClose();
       webSocket.current.close();
-      setConnected(false);
     };
 
   }, [connectionUri]);

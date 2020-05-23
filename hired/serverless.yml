@@ -1,4 +1,4 @@
-service: game-funemployed
+service: game-hired
 provider:
   name: aws
   runtime: nodejs12.x
@@ -37,7 +37,6 @@ functions:
           route: $disconnect
 
 custom:
-  siteName: game-funemployed
   dynamodb:
     stages:
       - ${self:provider.stage}

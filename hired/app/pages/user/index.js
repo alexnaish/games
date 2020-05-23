@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from 'react';
+
 import { useWebhook } from '../../components/socketmanager/hook';
 import { Shell } from '../../components/Shell';
+import { Heading } from '../../components/Heading';
+import { Input, Button } from '../../components/Form';
 
 export const Userpage = ({ }) => {
 
@@ -30,21 +33,11 @@ export const Userpage = ({ }) => {
 
   return (
     <Shell>
-      Status: {connected ? 'Connected' : 'Not Connected'}
-      Role: {state.role}
-      State: {JSON.stringify(state)}
       <div>
-        <fieldset>
-          <div>
-            <label htmlFor="name">Name:</label>
-            <input type="text" name="name" value={state.name} onChange={(event) => setState({ ...state, name: event.target.value })} />
-          </div>
-          <div>
-            <label htmlFor="name">Room:</label>
-            <input type="text" name="room" value={state.room} onChange={(event) => setState({ ...state, room: event.target.value })} />
-          </div>
-          <button onClick={connectToGame} disabled={connected}>Connect</button>
-        </fieldset>
+				<Heading value='New Game' />
+				<Input placeholder="Name" value={state.name} onChange={({ value }) => setState({ ...state, name: value })} />
+				<Input placeholder="Room Code" value={state.room} onChange={({ value }) => setState({ ...state, room: value })} />
+				<Button onClick={connectToGame} disabled={connected}>Connect</Button>
       </div>
     </Shell>
   )

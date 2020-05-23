@@ -46,6 +46,12 @@ $main-colour: rgb(66, 146, 231);
     animation: rotateBackground 15s ease alternate infinite;
   }
 
+  .shell_wrapper {
+    background-color: rgba(82,82,82,0.3);
+    padding: 40px;
+    border-radius: 3px;
+  }
+
   &__sidebar {
     position: fixed;
     top: $nav-height;

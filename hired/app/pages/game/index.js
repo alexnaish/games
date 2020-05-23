@@ -3,10 +3,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { useWebhook } from '../../components/socketmanager/hook';
 import { Shell } from '../../components/Shell';
+import { Heading } from '../../components/Heading';
+import { Button, Input } from '../../components/Form';
 
 export const Gamepage = ({ }) => {
   const [users, setUsers] = useState({});
-  const [room, setRoom] = useState(null);
+  const [room, setRoom] = useState('');
 
   const startGame = useCallback(() => {
     sendMessage({ action: 'start', data: { room } })
@@ -33,13 +35,11 @@ export const Gamepage = ({ }) => {
 
   return (
     <Shell>
-      Game Page ({connected ? 'Connected!' : 'Not Connected'})
 
-      <fieldset>
-        <h1>{room}</h1>
-        <button onClick={startGame} disabled={!connected || Object.keys(users).length < 2}>Start Game</button>
-      </fieldset>
-      <pre>{JSON.stringify(users)}</pre>
+
+      <Heading value="New Game" />
+      <Input disabled={true} value={room} />
+      <Button onClick={startGame} disabled={!connected || Object.keys(users).length < 2}>Start Game</Button>
 
       <AnimatePresence>
         {
