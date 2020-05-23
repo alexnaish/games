@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@2.1.1
+
 jobs:
   hired-build:
     executor:
@@ -15,14 +16,12 @@ jobs:
           command: npm run build-fe
           working_directory: hired
       - run:
-          name: Install GH Pages
+          name: Deploy to GitHub pages
           command: |
-            npm install -g --silent gh-pages@2.0.1
             git config user.name "build"
             git config user.email "build@naish.io"
-      - run:
-          name: Deploy to GitHub pages
-          command: gh-pages --add --dist dist --dest hired
+            npx gh-pages --add --dist dist --dest hired
+          working_directory: hired
 
 workflows:
   hired:
