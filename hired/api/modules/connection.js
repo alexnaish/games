@@ -43,7 +43,7 @@ module.exports = async (event) => {
   switch (operation) {
     case 'creation': {
       const roomCode = await createNewRoom(connectionId, ttl);
-      gatewayClient.postToConnection({
+      await gatewayClient.postToConnection({
         ConnectionId: connectionId, Data: { event: 'ROOM_CREATION', payload: roomCode }
       });
       break;
