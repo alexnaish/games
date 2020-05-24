@@ -1,4 +1,4 @@
-service: game-hired
+service: games-hired
 provider:
   name: aws
   runtime: nodejs12.x
@@ -53,6 +53,4 @@ plugins:
   - serverless-offline
 
 resources:
-  - Resources: ${file(api/resources/s3.yml)}
-  - Resources: ${file(api/resources/s3_policy.yml)}
   - Resources: ${file(api/resources/dynamodb.yml)}
