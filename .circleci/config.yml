@@ -1,6 +1,14 @@
 version: 2.1
+
+references:
+  filter_only_master: &filter_only_master
+    branches:
+      only: master
+
 orbs:
   node: circleci/node@2.1.1
+  aws-cli: circleci/aws-cli@1.0.0
+  serverless: circleci/serverless-framework@1.0.1
 
 jobs:
   hired-build:
@@ -23,11 +31,25 @@ jobs:
             npx gh-pages --dist dist --dest hired
           working_directory: hired
 
+  hired-be-deploy:
+    executor: serverless/default
+    steps:
+      - checkout
+      - aws-cli/setup
+      - serverless/setup
+      - run:
+          command: serverless dynamodb install
+      - run:
+          command: serverless deploy -v
+          name: deploy
+          working_directory: hired
+
 workflows:
   hired:
     jobs:
       - hired-build:
           filters:
-            branches:
-              only:
-                - master
+            <<: *filter_only_master
+      - hired-be-deploy:
+          filters:
+            <<: *filter_only_master
