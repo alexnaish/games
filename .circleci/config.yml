@@ -26,4 +26,8 @@ jobs:
 workflows:
   hired:
     jobs:
-      - hired-build
+      - hired-build:
+          filters:
+            branches:
+              only:
+                - master
