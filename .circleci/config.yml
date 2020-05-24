@@ -20,7 +20,7 @@ jobs:
           command: |
             git config user.name "build"
             git config user.email "build@naish.io"
-            npx gh-pages --add --dist dist --dest hired
+            npx gh-pages --dist dist --dest hired
           working_directory: hired
 
 workflows:
