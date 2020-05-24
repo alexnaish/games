@@ -1,3 +1,5 @@
+console.log('entering into index.js');
+
 import React from 'react';
 import { Switch, Route } from "wouter";
 import { render } from "react-dom";
@@ -16,5 +18,6 @@ const App = () => (
     </Switch>
   </SocketProvider>
 );
+console.log('am i here?');
 
 render(<App />, document.getElementById('root'));
