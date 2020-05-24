@@ -14,11 +14,19 @@ provider:
       Action:
         - dynamodb:DeleteItem
         - dynamodb:GetItem
-        - dynamodb:Scan
         - dynamodb:PutItem
       Resource:
         Fn::GetAtt:
           - ConnectionsTable
+          - Arn
+    - Effect: Allow
+      Action:
+        - dynamodb:DeleteItem
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource:
+        Fn::GetAtt:
+          - RoomsTable
           - Arn
 
 package:
