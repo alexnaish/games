@@ -30,8 +30,6 @@ functions:
       - websocket:
           route: $connect
       - websocket:
-          route: something
-      - websocket:
           route: $default
       - websocket:
           route: $disconnect

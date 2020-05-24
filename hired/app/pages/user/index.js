@@ -28,7 +28,7 @@ export const Userpage = ({ }) => {
   const { connect, connected } = useWebhook({ onMessage: handleMessage, onError: console.error });
 
   const connectToGame = useCallback(() => {
-    connect('ws://localhost:3001', { operation: 'connect', room: state.room, name: state.name })
+    connect({ operation: 'connect', room: state.room, name: state.name })
   }, [state])
 
   return (

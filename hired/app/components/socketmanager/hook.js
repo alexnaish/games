@@ -11,9 +11,10 @@ export const useWebhook = ({ onOpen = NOOP, onClose = NOOP, onMessage = NOOP, on
   const webSocket = useRef(null);
   const [_, dispatch] = useContext(SocketContext);
 
-  const connect = useCallback((connectionString, params = {}) => {
-    const queryParams = Object.keys(params) ? `?${new URLSearchParams(params).toString()}` : ''
-    setConnectionUri(`${connectionString}${queryParams}`);
+  const connect = useCallback((params = {}) => {
+		const queryParams = Object.keys(params) ? `?${new URLSearchParams(params).toString()}` : '';
+		const connectionUrl = process.env.WSS_HIRED_URL || 'ws://localhost:3001';
+    setConnectionUri(`${connectionUrl}${queryParams}`);
   }, [])
 
   useEffect(() => {

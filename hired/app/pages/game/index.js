@@ -31,7 +31,7 @@ export const Gamepage = ({ }) => {
   }, []);
 
   const { connect, connected, sendMessage } = useWebhook({ onMessage: handleMessage, onError: console.error });
-  useEffect(() => connect('ws://localhost:3001', { operation: 'creation' }), []);
+  useEffect(() => connect({ operation: 'creation' }), []);
 
   return (
     <Shell>

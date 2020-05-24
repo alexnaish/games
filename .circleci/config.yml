@@ -37,8 +37,8 @@ jobs:
       - checkout
       - aws-cli/setup
       - serverless/setup
-      - run:
-          command: serverless dynamodb install
+      - node/install-packages:
+          app-dir: hired
       - run:
           command: serverless deploy -v
           name: deploy
