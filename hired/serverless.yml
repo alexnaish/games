@@ -1,0 +1,58 @@
+service: game-hired
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 128
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "execute-api:ManageConnections"
+      Resource:
+        - "arn:aws:execute-api:${self:provider.region}:*:**/@connections/*"
+    - Effect: Allow
+      Action:
+        - dynamodb:DeleteItem
+        - dynamodb:GetItem
+        - dynamodb:Scan
+        - dynamodb:PutItem
+      Resource:
+        Fn::GetAtt:
+          - ConnectionsTable
+          - Arn
+
+package:
+  individually: true
+
+functions:
+  websocket:
+    handler: api/websocket.handler
+    events:
+      - websocket:
+          route: $connect
+      - websocket:
+          route: something
+      - websocket:
+          route: $default
+      - websocket:
+          route: $disconnect
+
+custom:
+  dynamodb:
+    stages:
+      - ${self:provider.stage}
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+    migration:
+      dir: api/resources/
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-plugin-optimize
+  - serverless-offline
+
+resources:
+  - Resources: ${file(api/resources/s3.yml)}
+  - Resources: ${file(api/resources/s3_policy.yml)}
+  - Resources: ${file(api/resources/dynamodb.yml)}

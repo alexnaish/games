@@ -1,0 +1,29 @@
+version: 2.1
+orbs:
+  node: circleci/node@2.1.1
+
+jobs:
+  hired-build:
+    executor:
+      name: node/default
+      tag: 'lts'
+    steps:
+      - checkout
+      - node/install-packages:
+          app-dir: hired
+      - run:
+          name: build
+          command: npm run build-fe
+          working_directory: hired
+      - run:
+          name: Deploy to GitHub pages
+          command: |
+            git config user.name "build"
+            git config user.email "build@naish.io"
+            npx gh-pages --add --dist dist --dest hired
+          working_directory: hired
+
+workflows:
+  hired:
+    jobs:
+      - hired-build
