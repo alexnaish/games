@@ -28,6 +28,14 @@ provider:
         Fn::GetAtt:
           - RoomsTable
           - Arn
+    # - Effect: Allow
+    #     Action:
+    #       - dynamodb:DescribeStream
+    #       - dynamodb:GetRecords
+    #       - dynamodb:GetShardIterator
+    #       - dynamodb:ListStreams
+    #     Resource: arn:aws:dynamodb:*:*:table/my_table
+
   environment:
     APIG_ENDPOINT:
       Fn::Join:
@@ -51,6 +59,16 @@ functions:
           route: $default
       - websocket:
           route: $disconnect
+  roomNotifier:
+    handler: api/room.handler
+    events:
+      - stream:
+        type: dynamodb
+        batchSize: 1
+        arn:
+          Fn::GetAtt:
+            - RoomsTable
+            - StreamArn
 
 custom:
   dynamodb:

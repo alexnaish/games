@@ -15,14 +15,7 @@ const generateCredentials = !onAws ? () => ({
 
 module.exports = {
   generateGatewayClient: (event) => {
-		const credentials = generateCredentials(event);
-		console.log('==================');
-		console.log('event', event);
-		console.log('==================');
-		console.log('==================');
-		console.log('event.requestContext.domainName + "/" + event.requestContext.stage', event.requestContext.domainName + "/" + event.requestContext.stage);
-		console.log('==================');
-
+    const credentials = generateCredentials(event);
     const client = new AWS.ApiGatewayManagementApi(credentials);
     return {
       postToConnection: ({ ConnectionId, Data }) => client.postToConnection({

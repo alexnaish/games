@@ -2,10 +2,12 @@ ConnectionsTable:
   Type: AWS::DynamoDB::Table
   Properties:
     TableName: connections
+    ProvisionedThroughput:
+      ReadCapacityUnits: 1
+      WriteCapacityUnits: 1
     AttributeDefinitions:
       - AttributeName: connectionId
         AttributeType: S
-    BillingMode: PAY_PER_REQUEST
     KeySchema:
       - AttributeName: connectionId
         KeyType: HASH
@@ -21,7 +23,6 @@ RoomsTable:
     AttributeDefinitions:
       - AttributeName: room
         AttributeType: S
-    BillingMode: PAY_PER_REQUEST
     KeySchema:
       - AttributeName: room
         KeyType: HASH
@@ -30,3 +31,8 @@ RoomsTable:
     TimeToLiveSpecification:
       AttributeName: ttl
       Enabled: true
+    ProvisionedThroughput:
+      ReadCapacityUnits: 1
+      WriteCapacityUnits: 1
+    StreamSpecification:
+      StreamViewType: NEW_IMAGE
