@@ -7,8 +7,7 @@ import { Homepage } from './pages/home/';
 import { Gamepage } from './pages/game/';
 import { Userpage } from './pages/user/';
 
-const basePath = process.env.NODE_ENV === 'production' ? '/games/hired' : '/';
-console.log('using basepath', basePath);
+const basePath = process.env.NODE_ENV === 'production' ? '/games/hired' : '';
 const App = () => (
   <SocketProvider>
     <Router base={basePath}>

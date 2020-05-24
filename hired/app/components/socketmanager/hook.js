@@ -34,7 +34,7 @@ export const useWebhook = ({ onOpen = NOOP, onClose = NOOP, onMessage = NOOP, on
     }
 
     webSocket.current.onerror = (error) => {
-      logger.error('socket errored');
+      console.error('socket error', error);
       onError(error);
     }
 
