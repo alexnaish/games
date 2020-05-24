@@ -1,6 +1,7 @@
 service: games-hired
 provider:
   name: aws
+  region: eu-west-2
   runtime: nodejs12.x
   memorySize: 128
   iamRoleStatements:
