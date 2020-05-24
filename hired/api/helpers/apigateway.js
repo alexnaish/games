@@ -10,7 +10,7 @@ const generateCredentials = !onAws ? () => ({
   secretAccessKey: 'DEFAULT_SECRET',
 }) : (event) => ({
   apiVersion,
-  endpoint: event.requestContext.domainName + "/" + event.requestContext.stage
+  endpoint: process.env.APIG_ENDPOINT
 });
 
 module.exports = {
@@ -18,6 +18,9 @@ module.exports = {
 		const credentials = generateCredentials(event);
 		console.log('==================');
 		console.log('event', event);
+		console.log('==================');
+		console.log('==================');
+		console.log('event.requestContext.domainName + "/" + event.requestContext.stage', event.requestContext.domainName + "/" + event.requestContext.stage);
 		console.log('==================');
 
     const client = new AWS.ApiGatewayManagementApi(credentials);
