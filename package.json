@@ -1,0 +1,21 @@
+{
+  "name": "games",
+  "version": "1.0.0",
+  "repository": "git@github.com:alexnaish/games.git",
+  "author": "Alex Naish <alex@naish.io>",
+  "license": "MIT",
+  "private": true,
+	"workspaces": [
+		"sites/*",
+		"functions"
+	],
+  "scripts": {
+    "build": "lerna run build",
+    "export": "lerna run export"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "lerna": "^3.22.1",
+    "prettier": "^2.2.1"
+  }
+}

@@ -1,0 +1,49 @@
+.list {
+	display: flex;
+	flex-direction: row;
+  width: 100%;
+	border-top: 2px solid grey;
+}
+
+.item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	flex-basis: 0;
+	flex-shrink: 1;
+	height: 75px;
+}
+
+.item:nth-child(1) {
+  background-color: #2f4c58;
+	color: white;
+}
+.item:nth-child(2) {
+  background-color: #63a583;
+	color: white;
+}
+.item:nth-child(3) {
+  background-color: #4e6895;
+	color: white;
+}
+.item:nth-child(4) {
+  background-color: #e4dbd9;
+	color: #333;
+}
+.item:nth-child(5) {
+  background-color: #2d3758;
+	color: white;
+}
+.item:nth-child(6) {
+  background-color: #fab73d;
+	color: #333;
+}
+.item:nth-child(7) {
+  background-color: #546747;
+	color: white;
+}
+.item:nth-child(8) {
+  background-color: #5e6668;
+	color: white;
+}

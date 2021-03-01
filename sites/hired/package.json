@@ -1,0 +1,19 @@
+{
+  "name": "hired",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "preexport": "mkdir -p ../../dist/hired/ && rm -rf ../../dist/hired/",
+    "export": "next export && cp -R out/ ../../dist/hired/"
+  },
+  "dependencies": {
+    "framer-motion": "^3.6.2",
+    "next": "10.0.6",
+    "pusher-js": "^7.0.3",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  }
+}

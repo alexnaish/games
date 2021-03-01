@@ -1,0 +1,36 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  PUSHER_KEY: ${{ secrets.PUSHER_KEY }}
+
+jobs:
+  netlify-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - uses: actions/checkout@v2
+      - run: yarn && yarn build && yarn export
+        env:
+          PUSHER_KEY: ${{ secrets.PUSHER_KEY }}
+      - name: Deploy
+        uses: jsmrcaga/action-netlify-deploy@master
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_API_ID }}
+          NETLIFY_DEPLOY_MESSAGE: "Prod deploy v${{ github.ref }}"
+          NETLIFY_DEPLOY_TO_PROD: true
+          build_directory: ./dist
+          functions_directory: ./functions
+          install_command: echo "already installed!"
+          build_command: cp netlify.toml dist/
