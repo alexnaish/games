@@ -1,12 +1,13 @@
+import { Fragment } from 'react';
 import Head from 'next/head';
-import { AnimateSharedLayout } from 'framer-motion';
 
 import '@styles/variables.css';
 import '@styles/globals.css';
+import ShapeBackground from '@components/ShapeBackground';
 
 function Application({ Component, pageProps }) {
   return (
-    <AnimateSharedLayout>
+    <Fragment>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=" />
@@ -16,8 +17,9 @@ function Application({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
+			<ShapeBackground />
       <Component {...pageProps} />
-    </AnimateSharedLayout>
+    </Fragment>
   );
 }
 

@@ -3,12 +3,12 @@
 	--color-grey: #CCD1D9;
   --color-grey-light: #f5f7fa;
 
-  --color-blue: #5d9cec;
-  --color-green: #a0d468;
   --color-red: #d8334a;
-  --color-yellow: #ffce54;
   --color-orange: #fc6e51;
+  --color-yellow: #ffce54;
+  --color-green: #a0d468;
   --color-teal: #a0cecb;
+  --color-blue: #5d9cec;
   --color-purple: #8067b7;
   --color-pink: #ec87c0;
 }

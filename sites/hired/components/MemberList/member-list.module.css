@@ -13,6 +13,7 @@
   flex-basis: 0;
   flex-shrink: 1;
   height: 75px;
+	font-weight: 400;
 }
 
 .item:nth-child(1) {
