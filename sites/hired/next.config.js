@@ -1,8 +1,8 @@
 module.exports = {
-	trailingSlash: true,
+  trailingSlash: true,
   basePath: '/hired',
-	assetPrefix: '/hired/',
-	env: {
-		PUSHER_KEY: process.env.PUSHER_KEY
-	}
-}
+  assetPrefix: '/hired/',
+  env: {
+    PUSHER_KEY: process.env.PUSHER_KEY
+  }
+};
