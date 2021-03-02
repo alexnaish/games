@@ -10,7 +10,13 @@
 [[redirects]]
   from = "/hired/*"
   to = "/hired/index.html"
-  status = 302
+  status = 200
+
+#[[redirects]]
+#  from = "/hired/*"
+#  to = "http://localhost:3000/hired/:splat"
+#  status = 200
+#	force = true
 
 [[redirects]]
   from = "/"
