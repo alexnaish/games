@@ -11,7 +11,8 @@
 	],
   "scripts": {
     "build": "lerna run build",
-    "export": "lerna run export"
+    "export": "lerna run export",
+		"pretty": "prettier --write \"{sites, functions}/**/*.{js,ts,css}\""
   },
   "devDependencies": {
     "eslint": "^7.20.0",

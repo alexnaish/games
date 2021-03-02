@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router'
 import Link from 'next/link';
 
-import Header from '@components/Header';
+import Title from '@components/Title';
 import MemberList from '@components/MemberList';
 import usePusher from '@hooks/usePusher/';
 import useGame from '@hooks/useGame/';
@@ -23,10 +23,9 @@ export default function Game() {
 		<div className="container">
 			<Head>
 				<title>Game Page!</title>
-				<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=" />
 			</Head>
 			<main className="content">
-				<Header title="Hired!" />
+				<Title />
 				{ game.boss && (
 					<Fragment>
 						<div>Job: {game.job}</div>

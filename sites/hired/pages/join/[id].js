@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router'
 import Link from 'next/link';
 
-import Header from '@components/Header';
+import Title from '@components/Title';
 import Traits from '@components/Traits';
 import usePusher from '@hooks/usePusher';
 import useGame from '@hooks/useGame';
@@ -18,10 +18,6 @@ export default function Game() {
 		onMessage: game.handleEvent
 	});
 
-	console.log('==================');
-	console.log('game', game);
-	console.log('==================');
-
 	const startGame = useCallback(async () => {
 		await fetch('/api/start', { method: 'POST', body: JSON.stringify({ channel: id }) });
 	}, [id]);
@@ -30,11 +26,11 @@ export default function Game() {
 		<div className="container">
 			<Head>
 				<title>Join Page!</title>
-				<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=" />
 			</Head>
 
 			<main className="content">
-				<Header title={me.name}/>
+				<Title title={me.name} />
+				<div>{me.name}</div>
 				{ game.started && (
 					<Fragment>
 						{ game.boss === me.id && <div>You're the interviewer!</div>}

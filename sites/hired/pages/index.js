@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 
 import Head from 'next/head';
 import Link from 'next/link';
-import Header from '@components/Header';
+import Title from '@components/Title';
 
 export default function Home() {
 	const [channel, setChannel] = useState('');
@@ -13,16 +13,14 @@ export default function Home() {
     <div className="container">
       <Head>
         <title>Hired!</title>
-        <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=" />
       </Head>
-
-      <main>
-        <Header title="Home Page!" />
+      <main className="content">
+        <Title/>
         <Link href="/game/test">New Game</Link>
         <div>
-					<div><input type="text" maxLength="4" onChange={handleChannelChange} /></div>
+					<input type="text" maxLength="4" placeholder="Join Code" onChange={handleChannelChange} />
+					{ channel.length === 4 && <Link href={`/join/${channel.toUpperCase()}`}>Join Game</Link> }
 				</div>
-				{ channel.length === 4 && <Link href={`/join/${channel}`}>Join Game</Link> }
       </main>
 
     </div>
