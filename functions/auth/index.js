@@ -50,7 +50,7 @@ exports.handler = async function(event, context) {
 		const { users = [] } = await client.get({ path: `/channels/${channel_name}/users` }).then(res => res.json());
 		if (!users.length || !users.find(user => user.id.includes('game'))) {
 			return {
-				statusCode: 400,
+				statusCode: 403,
 				body: JSON.stringify({ error: 'Room does not exist.' })
 			}
 		}

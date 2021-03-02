@@ -3,7 +3,7 @@ import Pusher from 'pusher-js';
 
 import { reducer, defaultState, actions } from './reducer';
 
-export default function usePusher({ id, authPrefix, onMessage = () => {} }) {
+export default function usePusher({ id, authPrefix, onMessage, onError }) {
   const [state, dispatch] = useReducer(reducer, defaultState);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function usePusher({ id, authPrefix, onMessage = () => {} }) {
     });
     const connection = client.subscribe(id);
 
-    connection.bind('message', onMessage);
+    onMessage && connection.bind('message', onMessage);
 
     connection.bind('pusher:subscription_succeeded', ({ count, members, me }) => {
       const payload = { me: { id: me.id, ...me.info }, members: {} };
@@ -34,6 +34,21 @@ export default function usePusher({ id, authPrefix, onMessage = () => {} }) {
         payload
       });
     });
+
+    onError &&
+      connection.bind('pusher:subscription_error', (error) => {
+        switch (error.status) {
+          case 400:
+            onError('Invalid join request.');
+            break;
+          case 403:
+            onError('Room does not exist.');
+            break;
+          default:
+            onError('Unknown error!');
+            break;
+        }
+      });
 
     connection.bind('pusher:member_added', (member) => {
       if (member.id.includes('user')) {

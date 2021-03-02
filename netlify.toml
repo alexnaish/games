@@ -10,7 +10,7 @@
 [[redirects]]
   from = "/hired/*"
   to = "/hired/index.html"
-  status = 200
+  status = 302
 
 #[[redirects]]
 #  from = "/hired/*"

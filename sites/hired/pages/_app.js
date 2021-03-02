@@ -17,7 +17,7 @@ function Application({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
-			<ShapeBackground />
+      <ShapeBackground />
       <Component {...pageProps} />
     </Fragment>
   );

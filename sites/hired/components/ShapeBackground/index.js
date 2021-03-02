@@ -1,18 +1,20 @@
 import styles from './background.module.css';
 
-export default () => {
+const ShapesBackground = () => {
   return (
     <ul className={styles.wrapper}>
-			<li className={styles.shape}></li>
-			<li className={styles.shape}></li>
-			<li className={styles.shape}></li>
-			<li className={styles.shape}></li>
-			<li className={styles.shape}></li>
-			<li className={styles.shape}></li>
-			<li className={styles.shape}></li>
-			<li className={styles.shape}></li>
-			<li className={styles.shape}></li>
-			<li className={styles.shape}></li>
-		</ul>
+      <li className={styles.shape}></li>
+      <li className={styles.shape}></li>
+      <li className={styles.shape}></li>
+      <li className={styles.shape}></li>
+      <li className={styles.shape}></li>
+      <li className={styles.shape}></li>
+      <li className={styles.shape}></li>
+      <li className={styles.shape}></li>
+      <li className={styles.shape}></li>
+      <li className={styles.shape}></li>
+    </ul>
   );
-}
+};
+
+export default ShapesBackground;

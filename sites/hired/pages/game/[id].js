@@ -26,7 +26,7 @@ export default function Game() {
       </Head>
       <main className="content">
         <Title />
-				<div>Game Code: {id}</div>
+        <div>Game Code: {id}</div>
         {game.boss && (
           <Fragment>
             <div>Job: {game.job}</div>

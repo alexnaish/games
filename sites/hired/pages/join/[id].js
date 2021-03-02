@@ -1,21 +1,23 @@
-import { Fragment, useCallback } from 'react';
-import Head from 'next/head';
+import { Fragment, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import Head from 'next/head';
 
 import Title from '@components/Title';
 import Traits from '@components/Traits';
 import usePusher from '@hooks/usePusher';
 import useGame from '@hooks/useGame';
+import ErrorSection from '@components/ErrorSection';
 
-export default function Game() {
+export default function JoinGame() {
+  const [error, setError] = useState(null);
   const router = useRouter();
   const game = useGame();
   const { id } = router.query;
   const { me, count } = usePusher({
     id: id && `presence-hired-${id}`,
     authPrefix: 'user',
-    onMessage: game.handleEvent
+    onMessage: game.handleEvent,
+    onError: setError
   });
 
   const startGame = useCallback(async () => {
@@ -29,10 +31,11 @@ export default function Game() {
       </Head>
 
       <main className="content">
-        <Title title={me.name} />
-        <div>{me.name}</div>
+        <Title />
+        {error && <ErrorSection message={error} />}
         {game.started && (
           <Fragment>
+            <div>Name: {me.name}</div>
             {game.boss === me.id && <div>You're the interviewer!</div>}
             <div>Job: {game.job}</div>
           </Fragment>

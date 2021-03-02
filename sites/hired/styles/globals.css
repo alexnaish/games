@@ -29,6 +29,7 @@ body {
   align-items: center;
 }
 
+a,
 button {
   display: block;
   height: 48px;
@@ -38,17 +39,17 @@ button {
   text-align: center;
   line-height: 48px;
   width: 250px;
-	padding: 0;
+  padding: 0;
   font-weight: 400;
-	border: none;
+  border: none;
   border-radius: 4px;
-	cursor: pointer;
+  cursor: pointer;
 }
 
 button[disabled] {
-	background-color: var(--color-grey);
-	cursor: not-allowed;
-	pointer-events: visible;
+  background-color: var(--color-grey);
+  cursor: not-allowed;
+  pointer-events: visible;
 }
 
 input[type='text'] {
