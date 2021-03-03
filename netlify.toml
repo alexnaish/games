@@ -8,9 +8,14 @@
   status = 200
 
 [[redirects]]
-  from = "/hired/*"
-  to = "/hired/index.html"
-  status = 302
+ from = "/hired/game/*"
+ to = "/hired/game/[id]/index.html"
+ status = 200
+
+[[redirects]]
+ from = "/hired/join/*"
+ to = "/hired/join/[id]/index.html"
+ status = 200
 
 #[[redirects]]
 #  from = "/hired/*"
