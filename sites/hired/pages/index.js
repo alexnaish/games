@@ -26,7 +26,9 @@ export default function Home() {
         <title>Hired!</title>
       </Head>
       <main className="content">
-        <Title />
+        <SlideFade order={0}>
+          <Title />
+        </SlideFade>
         <SlideFade order={1}>
           <button onClick={startNewGame}>New Game</button>
         </SlideFade>

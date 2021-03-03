@@ -12,10 +12,24 @@ const client = new Pusher({
 const sortRandom = () => 0.5 - Math.random();
 const qualificationCount = 5;
 
-exports.handler = async function(event, context) {
+const recognisedGames = ['hired'];
 
-	const response = await client.get({ path: "/channels/presence-hired-test/users" });
+exports.handler = async function(event, context) {
+	const { code, game } = event.queryStringParameters;
+
+	if (!code || code.length !== 4 || !recognisedGames.includes(game)) {
+		return {
+			statusCode: 400
+		}
+	}
+	const channelName = `presence-${game}-${code}`;
+	const response = await client.get({ path: `/channels/${channelName}/users` });
 	const { users } = await response.json();
+	if (users.length < 3) {
+		return {
+			statusCode: 400
+		}
+	}
 
 	const participants = users.filter(user => user.id.includes('user'));
 	const [boss, ...remainingPlayers] = participants.sort(sortRandom);
@@ -29,7 +43,7 @@ exports.handler = async function(event, context) {
 		return acc;
 	}, {});
 
-	client.trigger('presence-hired-test', 'message', {
+	client.trigger(channelName, 'message', {
 		event: 'game-start',
 		data: {
 			job,

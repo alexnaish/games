@@ -21,7 +21,12 @@ export default function JoinGame() {
   });
 
   const startGame = useCallback(async () => {
-    await fetch('/api/start', { method: 'POST', body: JSON.stringify({ channel: id }) });
+    setError(null);
+    const res = await fetch(`/api/start?game=hired&code=${id}`, {
+      method: 'POST',
+      body: JSON.stringify({ channel: id })
+    });
+    if (res.status !== 200) setError('Unable to start game.');
   }, [id]);
 
   return (
@@ -33,16 +38,16 @@ export default function JoinGame() {
       <main className="content">
         <Title />
         {error && <ErrorSection message={error} />}
+        {me.name && <div>Name: {me.name}</div>}
         {game.started && (
           <Fragment>
-            <div>Name: {me.name}</div>
             {game.boss === me.id && <div>You're the interviewer!</div>}
             <div>Job: {game.job}</div>
+            {game.traits[me.id] && <Traits traits={game.traits[me.id]} />}
           </Fragment>
         )}
         {count > 2 && !game.started && <button onClick={startGame}>Start Game</button>}
       </main>
-      {game.traits[me.id] && <Traits traits={game.traits[me.id]} />}
     </div>
   );
 }
